@@ -2,7 +2,6 @@
 #include <time.h>
 #include <stdlib.h> 
 
-
 double populate(int a[], int b[], int n) {
     clock_t start, end;
     double cpu_time_used;
@@ -122,16 +121,13 @@ double insertion(int a[], int n) {
 
 int main()
 {
-    int n = 100000; 
+    int n = 100000;
     int a[n],b[n];
     double timeToPopulate = populate(a, b, n);
     printf("Time taken to populate: %f\nSorting...\n", timeToPopulate);
-
-    //selection sort
     //first sort from 0 to 100 the 0 to 200 and so on upto n
     double timeToSortI = insertion(a, n);
     printf("Array sorted by insertion sort in %.2f\n", timeToSortI);
-
     double timeToSortS = selection(b, n);
     printf("Array sorted by selection sort in %.2f\n", timeToSortS);
 

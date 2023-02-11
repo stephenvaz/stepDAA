@@ -18,7 +18,7 @@ double populate(int a[], int b[], int n) {
 }
 
 double selection(int a[], int n) {
-    FILE *fp = fopen("./selection.txt", "w+");
+    FILE *fp = fopen("./selection.csv", "w+");
     // printf("File opened\n");
     double totalTime = 0;
     if(!fp) {
@@ -66,8 +66,8 @@ int main()
     double cpu_time_used;
     
     // code goes here
-    // int n = 1000000;
-       int n = 100000; 
+    //    int n = 100000; 
+    int n = 50000; 
          // 400000
     int a[n],b[n];
     //populate array with random integers

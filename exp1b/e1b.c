@@ -116,8 +116,6 @@ double insertion(int a[], int n) {
     fclose(fp);
     return totalTime;
 }
-    
-
 
 int main()
 {
@@ -127,10 +125,11 @@ int main()
     printf("Time taken to populate: %f\nSorting...\n", timeToPopulate);
     //first sort from 0 to 100 the 0 to 200 and so on upto n
     double timeToSortI = insertion(a, n);
-    printf("Array sorted by insertion sort in %.2f\n", timeToSortI);
+    
     double timeToSortS = selection(b, n);
-    printf("Array sorted by selection sort in %.2f\n", timeToSortS);
 
+    printf("Array sorted by insertion sort in %.2f\n", timeToSortI);
+    printf("Array sorted by selection sort in %.2f\n", timeToSortS);
     printf("Total time taken to sort: %f\n", timeToSortI + timeToSortS);
     
     return 0;

@@ -51,7 +51,7 @@ double sqrt2logn(int x) { return pow(sqrt(2), log2(x)); }
 // }
 int (*fInt)(int);
 double (*fDouble)(int);
-unsigned long long (*fLong)(int);
+unsigned long long (*fLong)(unsigned long f);
 int main()
 {
     printf("\tLinear(n+5)\n");

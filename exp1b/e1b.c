@@ -6,15 +6,31 @@ double populate(int a[], int b[], int n) {
     clock_t start, end;
     double cpu_time_used;
     start = clock();
-    for(int i = 0; i <= n; i++)
+    for(int i = 0; i < n; i++)
     {
         int r = rand();
         a[i] = b[i] = r;
     }
     end = clock();
+    FILE *fp = fopen("./random.txt", "w+");
+    if(!fp) {
+        printf("Error opening file\n");
+        return -1;
+    }
+    for(int i = 0; i < n; i++) {
+        fprintf(fp, "%d\n", a[i]);
+    }
     cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
     return cpu_time_used;
 }
+
+
+void swap(int *x, int *y) {
+    int t = *x;
+    *x = *y;
+    *y = t;
+}
+
 
 double selection(int a[], int n) {
     FILE *fp = fopen("./selection.csv", "w+");
@@ -38,15 +54,12 @@ double selection(int a[], int n) {
                     min = k;
                 }
             }
-            int temp = a[j];
-            a[j] = a[min];
-            a[min] = temp;
+            swap(&a[j], &a[min]);
         }
         end = clock();
         cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
         totalTime += cpu_time_used;
         fprintf(fp, "%d, %f\n", i, cpu_time_used);
-        
         printf("Sorted from 0 to %d in %.2fs\n", i, cpu_time_used);
 
         // for(int z = 0; z < i; z++) {
@@ -61,12 +74,6 @@ double selection(int a[], int n) {
     }
     fclose(fp);
     return totalTime;
-}
-
-void swap(int *x, int *y) {
-    int t = *x;
-    *x = *y;
-    *y = t;
 }
 
 double insertion(int a[], int n) {
@@ -125,12 +132,9 @@ int main()
     printf("Time taken to populate: %f\nSorting...\n", timeToPopulate);
     //first sort from 0 to 100 the 0 to 200 and so on upto n
     double timeToSortI = insertion(a, n);
-    
     double timeToSortS = selection(b, n);
-
     printf("Array sorted by insertion sort in %.2f\n", timeToSortI);
     printf("Array sorted by selection sort in %.2f\n", timeToSortS);
     printf("Total time taken to sort: %f\n", timeToSortI + timeToSortS);
-    
     return 0;
 }

@@ -5,29 +5,45 @@
 
 void tableDouble(int start, int end, int incr, double (*f)())
 {
+    FILE *fp = fopen("output.csv", "a+");
+    fprintf(fp, "n, f(n)\n");
     for (int i = start; i <= end; i += incr)
     {
         printf("\t%d\t| %f\n", i, f(i));
+        fprintf(fp, "%d, %f\n", i, f(i));
     }
+    fclose(fp);
+    printf("\n");
 }
 void tableInt(int start, int end, int incr, int (*f)())
 {
+    FILE *fp = fopen("output.csv", "a+");
+    fprintf(fp, "n, f(n)\n");
     for (int i = start; i <= end; i += incr)
     {
         printf("\t%d\t| %d\n", i, f(i));
+        fprintf(fp, "%d, %d\n", i, f(i));
     }
+    fclose(fp);
+    printf("\n");
 }
 void tablelong(int start, int end, int incr, unsigned long long (*f)())
 {
+    FILE *fp = fopen("output.csv", "a+");
+    fprintf(fp, "n, f(n)\n");
     for (int i = start; i <= end; i += incr)
     {
         printf("\t%d\t| %lld\n", i, f(i));
+        fprintf(fp, "%d, %lld\n", i, f(i));
     }
+    fclose(fp);
+    printf("\n");
 }
 
 int linear(int x)
 {
-    return x + 5; // linear function
+    return x + 5;
+    // linear function
 }
 double fun1(int x) { return pow(1.5, x); }
 double ln(int x) { return log(x); }
@@ -46,9 +62,7 @@ unsigned long long factorial(unsigned long f)
 
 double nloglogn(int x) { return pow(x, log2(log2(x))); }
 double sqrt2logn(int x) { return pow(sqrt(2), log2(x)); }
-// unsigned long long factorial (int x) {
 
-// }
 int (*fInt)(int);
 double (*fDouble)(int);
 unsigned long long (*fLong)(unsigned long f);
@@ -86,5 +100,5 @@ int main()
     tableDouble(0, 100, 10, fDouble);
     printf("\tFactorial\n");
     fLong = factorial;
-    tablelong(0,20,2, fLong);
+    tablelong(0, 20, 2, fLong);
 }

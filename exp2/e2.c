@@ -198,10 +198,9 @@ int main()
     //first sort from 0 to 100 the 0 to 200 and so on upto n
     // mergeSort(a,0,n);
     double mergeT = mergeCalc(a, n);
-    printf("Time taken by  Merge Sort: %f\n", mergeT);
     double quickT = qC(b, n);
+    printf("Time taken by  Merge Sort: %f\n", mergeT);
     printf("Time taken by  Quick Sort: %f\n", quickT);
     //printArr(a,n);
-    
     return 0;
 }

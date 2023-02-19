@@ -24,19 +24,15 @@ double populate(int a[], int b[], int n) {
     return cpu_time_used;
 }
 
-
-
 void merge(int a[], int l, int m, int r) {
     int i, j, k;
     int n1 = m - l + 1;
     int n2 = r - m;
     int L[n1], R[n2];
-    /* Copy data to temp arrays L[] and R[] */
     for (i = 0; i < n1; i++)
         L[i] = a[l + i];
     for (j = 0; j < n2; j++)
         R[j] = a[m + 1 + j];
-    /* Merge the temp arrays back into arr[l..r]*/
     i = j = 0;
     k = l;
     while(i < n1 && j < n2) {
@@ -50,16 +46,11 @@ void merge(int a[], int l, int m, int r) {
         }
         k++;
     }
-    /* Copy the remaining elements of L[], if there
-       are any */
     while (i < n1) {
         a[k] = L[i];
         i++;
         k++;
     }
-    /* Copy the remaining elements of R[], if there
-       are any */
-
     while (j < n2) {
         a[k] = R[j];
         j++;
@@ -68,24 +59,16 @@ void merge(int a[], int l, int m, int r) {
 }
 
 void mergeSort(int a[], int l, int r) {
-    // printf("\nl: %d, r: %d\n", l, r);
-    //  printf("\nO l: %d, r: %d\n", l, r);
 	if(l<r) {
 		int m = (l+r)/2;
-		//call for left array
-        // printf("\nI l: %d, m: %d, r: %d\n", l, m, r);
 		mergeSort(a, l, m);
-        
-        //call for right array
         mergeSort(a, m+1, r);
-        //merge the two arrays
-         merge(a, l, m, r);
+        merge(a, l, m, r);
 	}
 }
 
 double mergeCalc(int a[], int n) {
     FILE *fp = fopen("./mergeSort.csv", "w+");
-    // printf("File opened\n");
     double totalTime = 0;
     if(!fp) {
         printf("Error opening file\n");
@@ -121,16 +104,11 @@ void swap(int *x, int *y) {
 
 int partition(int arr[], int low, int high)
 {
-    int pivot = arr[high]; // pivot
-    int i
-        = (low
-           - 1); // Index of smaller element and indicates
-                 // the right position of pivot found so far
- 
+    int pivot = arr[high];
+    int i = (low - 1);
     for (int j = low; j <= high - 1; j++) {
-        // If current element is smaller than the pivot
         if (arr[j] < pivot) {
-            i++; // increment index of smaller element
+            i++;
             swap(&arr[i], &arr[j]);
         }
     }
@@ -142,12 +120,7 @@ int partition(int arr[], int low, int high)
 void quickSort(int a[], int low, int high)
 {
     if (low < high) {
-        /* pi is partitioning index, arr[p] is now
-        at right place */
         int pi = partition(a, low, high);
- 
-        // Separately sort elements before
-        // partition and after partition
         quickSort(a, low, pi - 1);
         quickSort(a, pi + 1, high);
     }
@@ -155,7 +128,6 @@ void quickSort(int a[], int low, int high)
 
 double qC(int a[], int n) {
     FILE *fp = fopen("./quickSort.csv", "w+");
-    // printf("File opened\n");
     double totalTime = 0;
     if(!fp) {
         printf("Error opening file\n");
@@ -194,13 +166,9 @@ int main()
     int a[n],b[n];
     double timeToPopulate = populate(a, b, n);
     printf("Time taken to populate: %f\nSorting...\n", timeToPopulate);
-    //msort(a,n);
-    //first sort from 0 to 100 the 0 to 200 and so on upto n
-    // mergeSort(a,0,n);
     double mergeT = mergeCalc(a, n);
     double quickT = qC(b, n);
     printf("Time taken by  Merge Sort: %f\n", mergeT);
     printf("Time taken by  Quick Sort: %f\n", quickT);
-    //printArr(a,n);
     return 0;
 }

@@ -12,7 +12,7 @@ double populate(int a[], int b[], int n) {
         a[i] = b[i] = r;
     }
     end = clock();
-    FILE *fp = fopen("./random.txt", "w+");
+    FILE *fp = fopen("./random10.txt", "w+");
     if(!fp) {
         printf("Error opening file\n");
         return -1;
@@ -33,7 +33,7 @@ void swap(int *x, int *y) {
 
 
 double selection(int a[], int n) {
-    FILE *fp = fopen("./selection.csv", "w+");
+    FILE *fp = fopen("./selection10.csv", "w+");
     // printf("File opened\n");
     double totalTime = 0;
     if(!fp) {
@@ -41,7 +41,7 @@ double selection(int a[], int n) {
         return -1;
     }
     fprintf(fp, "n, time\n");
-    for (int i = 100; i <= n; i+=100)
+    for (int i = 9999; i <= n; i+=10000)
     {
         // printf("%d\n", i);
         clock_t start, end;
@@ -49,7 +49,7 @@ double selection(int a[], int n) {
         start = clock();
         for(int j = 0; j < i; j++) {
             int min = j;
-            for(int k = j+1; k < i; k++) {
+            for(int k = j+1; k <= i; k++) {
                 if(a[k] < a[min]) {
                     min = k;
                 }
@@ -59,7 +59,7 @@ double selection(int a[], int n) {
         end = clock();
         cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
         totalTime += cpu_time_used;
-        fprintf(fp, "%d, %f\n", i, cpu_time_used);
+        fprintf(fp, "%d, %f\n", i+1, cpu_time_used);
         printf("Sorted from 0 to %d in %.2fs\n", i, cpu_time_used);
 
         // for(int z = 0; z < i; z++) {
@@ -68,7 +68,7 @@ double selection(int a[], int n) {
         // getchar();
     }
     fclose(fp);
-    fp = fopen("./selection.txt", "w+");
+    fp = fopen("./selection10.txt", "w+");
     for(int i = 0; i < n; i++) {
         fprintf(fp, "%d\n", a[i]);
     }
@@ -77,7 +77,7 @@ double selection(int a[], int n) {
 }
 
 double insertion(int a[], int n) {
-    FILE *fp = fopen("./insertion.csv", "w+");
+    FILE *fp = fopen("./insertion10.csv", "w+");
     // printf("File opened\n");
     double totalTime = 0;
     if(!fp) {
@@ -87,13 +87,13 @@ double insertion(int a[], int n) {
     fprintf(fp, "n, time\n");
     //insertion sort
     //first sort from 0 to 100 the 0 to 200 and so on upto n
-    for (int i = 100; i <= n; i+=100)
+    for (int i = 9999; i <= n; i+=10000)
     {
         // printf("%d\n", i);
         clock_t start, end;
         double cpu_time_used;
         start = clock();
-        for(int j = 1; j < i; j++)
+        for(int j = 1; j <= i; j++)
         {
             int k = j;
             // printf("%d\n", i);
@@ -106,7 +106,7 @@ double insertion(int a[], int n) {
         end = clock();
         cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
         totalTime += cpu_time_used;
-        fprintf(fp, "%d, %f\n", i, cpu_time_used);
+        fprintf(fp, "%d, %f\n", i+1, cpu_time_used);
         
         printf("Sorted from 0 to %d in %.2fs\n", i, cpu_time_used);
 
@@ -116,7 +116,7 @@ double insertion(int a[], int n) {
         // getchar();
     }
     fclose(fp);
-    fp = fopen("./insertion.txt", "w+");
+    fp = fopen("./insertion10.txt", "w+");
     for(int i = 0; i < n; i++) {
         fprintf(fp, "%d\n", a[i]);
     }

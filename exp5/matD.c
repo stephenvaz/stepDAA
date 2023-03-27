@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-int MatrixChainOrder(int p[], int n)
+int matrixmin(int p[], int n)
 {
 	int m[n][n];
     memset(m, 0, sizeof(m[0][0]) * n * n);
@@ -40,16 +40,10 @@ int MatrixChainOrder(int p[], int n)
 int main()
 {
 	int arr[] = { 2, 3, 2, 4 };
-    //2*3 3*5 5*4
-    // 2*5 5*4
-    //2*4    
-    // 2*3 3*2 2*4
-    // 2*2 2*4
-    // 2*4
 	int size = sizeof(arr) / sizeof(arr[0]);
 
 	printf("min cost is %d ",
-		MatrixChainOrder(arr, size));
+		matrixmin(arr, size));
 
 	getchar();
 	return 0;

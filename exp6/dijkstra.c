@@ -42,12 +42,13 @@ void dijkstra(int graph[MAX][MAX], int n, int sV)
                 }
         count++;
     }
-
+    int sum = 0;
     for (int i = 0; i < n; i++)
     {
         if (i != sV)
         {
             printf("\n%d<->%d: %d", sV, i, distance[i]);
+            sum += distance[i];
             if (i == n - 1)
             {
                 printf("\nPath: %d", i);
@@ -60,6 +61,7 @@ void dijkstra(int graph[MAX][MAX], int n, int sV)
             }
         }
     }
+    printf("\nTotal: %d\n", sum);
 }
 
 int main()
@@ -68,12 +70,17 @@ int main()
     printf("No. of vertices: ");
     scanf("%d", &n);
     printf("\nAdjacency matrix: \n");
+    // 0 2 4 0 0 0
+    // 0 0 1 7 0 0
+    // 0 0 0 0 3 0
+    // 0 0 0 0 0 1
+    // 0 0 0 2 0 5
+    // 0 0 0 0 0 0
     for (i = 0; i < n; i++)
         for (j = 0; j < n; j++)
             scanf("%d", &graph[i][j]);
     printf("\nStarting vertex: ");
     scanf("%d", &u);
     dijkstra(graph, n, u);
-
     return 0;
 }

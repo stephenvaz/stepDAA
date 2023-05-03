@@ -13,7 +13,7 @@ void printarr(int a[][2])
 	}
 }
 
-void userInput(int a[][2])
+void userInput(int a[2][2])
 {
 	for (int i = 0; i < 2; i++)
 	{

@@ -3,48 +3,62 @@
 
 void matchString(char str[], char pat[], int q)
 {
-    int x = strlen(pat);
-    int y = strlen(str);
-    int p = 0, t = 0, h = 1, d = 256;
+    int pat_len = strlen(pat);
+    int str_len = strlen(str);
+    int pat_hash = 0, str_hash = 0, h = 1, d = 256;
     int i, j;
-    for (i = 0; i < x - 1; i++)
+
+    // Compute the value of h to be used later
+    for (i = 0; i < pat_len - 1; i++)
     {
         h = (h * d) % q;
     }
-    for (i = 0; i < x; i++)
+
+    // Compute the hash values of the pattern and the first substring of the same length in the string
+    for (i = 0; i < pat_len; i++)
     {
-        p = (d * p + pat[i]) % q;
-        t = (d * t + str[i]) % q;
+        pat_hash = (d * pat_hash + pat[i]) % q;
+        str_hash = (d * str_hash + str[i]) % q;
     }
-    for (i = 0; i <= y - x; i++)
+
+    // Check each substring of the same length as the pattern in the string for a match
+    for (i = 0; i <= str_len - pat_len; i++)
     {
-        if (p == t)
+        // If the hash values match, check the actual characters for a match
+        if (pat_hash == str_hash)
         {
-            for (j = 0; j < x; j++)
+            for (j = 0; j < pat_len; j++)
             {
                 if (str[i + j] != pat[j])
                 {
                     break;
                 }
             }
-            if (j == x)
+
+            // If all characters match, print the index at which the match occurs in the string and return
+            if (j == pat_len)
             {
                 printf("\nMatch Found at index: %d \n", i);
                 return;
             }
         }
-        if (i < y - x)
-        {
-            t = (d * (t - str[i] * h) + str[i + x]) % q;
 
-            if (t < 0)
+        // Compute the hash value of the next substring using the previous substring's hash value
+        if (i < str_len - pat_len)
+        {
+            str_hash = (d * (str_hash - str[i] * h) + str[i + pat_len]) % q;
+
+            if (str_hash < 0)
             {
-                t = (t + q);
+                str_hash = (str_hash + q);
             }
         }
     }
+
+    // If no match is found, print a message indicating so
     printf("\nMatch Not Found\n");
 }
+
 
 int main()
 {

@@ -1,9 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <strings.h>
 
 int n;
 
-int check(int row, int col, int (*arr)[n])
+int check(int row, int col, int arr[][n])
 {
 
     for (int i = 0; i < col; i++)
@@ -13,6 +14,8 @@ int check(int row, int col, int (*arr)[n])
             return 0;
         }
     }
+    // loop through and check if no other queen is in same row
+    
 
     for (int i = row, j = col; i >= 0 && j >= 0; i--, j--)
     {
@@ -32,7 +35,7 @@ int check(int row, int col, int (*arr)[n])
     return 1;
 }
 
-int queens(int col, int (*arr)[n])
+int queens(int arr[n][n],int col)
 {
     if (col >= n)
     {
@@ -47,7 +50,7 @@ int queens(int col, int (*arr)[n])
 
             arr[i][col] = 1;
 
-            if (queens(col + 1, arr))
+            if (queens(arr,col + 1))
             {
                 return 1;
             }
@@ -59,7 +62,7 @@ int queens(int col, int (*arr)[n])
     return 0;
 }
 
-void printBoard(int (*arr)[n])
+void printBoard(int arr[][n])
 {
     for (int i = 0; i < n; i++)
     {
@@ -76,14 +79,8 @@ int main()
     printf("No. of Queens(n): ");
     scanf("%d", &n);
     int arr[n][n];
-    for (int i = 0; i < n; i++)
-    {
-        for (int j = 0; j < n; j++)
-        {
-            arr[i][j] = 0;
-        }
-    }
-    if (queens(0, arr))
+    memset(arr, 0, sizeof(arr[0][0])*n*n);
+    if (queens(arr,0))
     {
         printf("\nSolution:\n");
         printBoard(arr);

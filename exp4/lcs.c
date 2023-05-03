@@ -15,17 +15,19 @@ void lcs(char str1[], char str2[])
 	for (i = 1; i <= m; i++)
 		for (j = 1; j <= n; j++)
 		{
-			if (str1[i - 1] == str2[j - 1])
 			{
-				table[i][j] = table[i - 1][j - 1] + 1;
-			}
-			else if (table[i - 1][j] >= table[i][j - 1])
-			{
-				table[i][j] = table[i - 1][j];
-			}
-			else
-			{
-				table[i][j] = table[i][j - 1];
+				if (str1[i - 1] == str2[j - 1])
+				{
+					table[i][j] = table[i - 1][j - 1] + 1;
+				}
+				else if (table[i - 1][j] >= table[i][j - 1])
+				{
+					table[i][j] = table[i - 1][j];
+				}
+				else
+				{
+					table[i][j] = table[i][j - 1];
+				}
 			}
 		}
 

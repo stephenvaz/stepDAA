@@ -1,6 +1,6 @@
-#include <limits.h>
+
 #include <stdio.h>
-#include <stdlib.h>
+#include <limits.h>
 #include <string.h>
 
 void print_parentheses(int s[][5], int i, int j)
@@ -18,6 +18,7 @@ void print_parentheses(int s[][5], int i, int j)
 
 int matrixmin(int p[], int n)
 {
+    //  n is number of elements in chain
     int m[n][n];
     int s[n][n];
     memset(m, 0, sizeof(m[0][0]) * n * n);
@@ -79,24 +80,26 @@ int matrixmin(int p[], int n)
     printf("Multiplication Order: ");
     print_parentheses(s, 1, n - 1);
     printf("\n");
-    return m[1][n - 1];
+    return m[1][n - 1]; // returns 1st row, last  element
 }
 
 int main()
 {
     // int arr[] = {5,4,6,2,7};
     // int size = sizeof(arr) / sizeof(arr[0]);
-    printf("Length of matix chain: ");
-    int n;
-    scanf("%d", &n);
-    int arr[n];
-    printf("Dimensions of the matrices: ");
-    for (int i = 0; i < n; i++)
-    {
-        scanf("%d", &arr[i]);
-    }
+    // printf("Length of matix chain: ");
+    // int n;
+    // scanf("%d", &n);
+    // int arr[n];
+    // printf("Dimensions of the matrices: ");
+    // for (int i = 0; i < n; i++)
+    // {
+    //     scanf("%d", &arr[i]);
+    // }
+    int n = 5;
+    int p[] = {5,4,6,2,7};
 
-    printf("min cost is %d\n", matrixmin(arr, n));
+    printf("min cost is %d\n", matrixmin(p, n));
 
     return 0;
 }
